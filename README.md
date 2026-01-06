@@ -3,7 +3,7 @@
 ## Overview
 This project automates zero-traffic cell detection for 5G networks using Python.
 It processes daily KPI files, filters zero-traffic cells based on defined rules,
-and generates consolidated Excel reports for network operations.
+and generates consolidated Excel reports for network operations. 
 
 The automation replaces manual Excel-based analysis and ensures consistent,
 repeatable reporting.
