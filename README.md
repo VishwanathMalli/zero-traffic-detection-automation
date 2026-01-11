@@ -1,134 +1,94 @@
-# Zero Traffic Detection Automation (5G)
+# Zero Traffic Detection Automation (LTE / NR)
 
 ## Overview
-This project automates zero-traffic cell detection for 5G networks using Python.
-It processes daily KPI files, filters zero-traffic cells based on defined rules,
-and generates consolidated Excel reports for network operations. 
-
-The automation replaces manual Excel-based analysis and ensures consistent,
-repeatable reporting.
-
----
-
-## Problem Statement
-Manual identification of zero-traffic cells from large KPI datasets is time-consuming,
-error-prone, and difficult to scale on a daily basis.
-This automation streamlines the entire workflow from raw KPI input to final reports.
+This project automates zero-traffic detection for LTE/NR cells using Python.  
+It processes daily KPI data, applies business rules to identify zero-traffic cells, generates summary reports, and stores the processed results in both Excel and MySQL for further analysis.
 
 ---
 
 ## Key Features
-- Config-driven file handling using `config.json`
-- Automated zero-traffic filtering logic
-- Safe handling of invalid and missing KPI values
-- Availability data enrichment
-- Excel report generation with multiple sheets
-- Built-in logging for traceability and debugging
-- Modular and reusable Python functions
+- Automated detection of zero-traffic NR cells
+- Business-rule based filtering using traffic hours, traffic volume, and cell state
+- Consolidation of online and newly detected zero-traffic cells
+- Summary and historical zero-traffic analysis
+- Excel report generation
+- MySQL database storage using SQLAlchemy
 
 ---
 
 ## Technologies Used
 - Python
 - Pandas
-- openpyxl
-- JSON
-- Logging
+- SQLAlchemy
+- MySQL
+- Excel (openpyxl)
 
 ---
 
-## Project Structure
-zero-traffic-detection-automation/
-│
-├── config.json
-├── zero_traffic_automation.py
-├── requirements.txt
-├── README.md
-│
-├── input_samples/
-│ ├── raw_kpi_sample.csv
-│ ├── availability_sample.csv
-│ └── trending_sample.xlsx
-│
-├── output_samples/
-│ └── output.xlsx
-│
-└── zero_traffic_automation.log
-
+## Input Files
+Configured through `config.json`:
+- Raw NR KPI CSV file
+- Online cells Excel file
+- Radio availability CSV file
+- Engineer / province mapping Excel file
 
 ---
 
-## Configuration
-All file paths and runtime settings are controlled through `config.json`.
-
-Example:
-{
-"base_path": "C:/Python-Workspace/Projects/Project02_5G_ZeroTraffic",
-"raw_mail_file": "raw_kpi.csv",
-"online_sheet_file": "trending.xlsx",
-"online_sheet_name": "Consol_Non-Consol",
-"availability_file": "availability.csv",
-"output_file": "output.xlsx",
-"log_file": "zero_traffic_automation.log"
-}
-
+## Processing Logic
+1. Load raw KPI and reference data
+2. Convert numeric and date fields
+3. Filter cells where:
+   - Latest date
+   - No_of_Hours = 4
+   - NR_Traffic = 0
+   - administrativeState = UNLOCKED
+   - operationalState = ENABLED
+4. Build structured output dataset
+5. Enrich data with availability and engineer mapping
+6. Merge with online cell data
+7. Generate summary and zero-traffic day count
 
 ---
 
-## How to Run
-1. Clone the repository
-2. Install dependencies:
-pip install -r requirements.txt
-3. Update file paths in `config.json`
-4. Run the script:
+## SQL Integration
+The automation stores processed KPI data into a MySQL database using SQLAlchemy.  
+The database is created automatically for local usage.
 
+### Tables Created
+- consol_non_consol – consolidated zero-traffic and online cell data
+- summary – UPC-wise zero-traffic summary
+- no_of_days_zerotraffic – cell-wise zero-traffic day count
+
+This allows reuse of processed data for reporting and analysis.
 
 ---
 
 ## Output
-The script generates an Excel file with the following sheets:
-- Consol_Non-Consol – Detailed zero-traffic cell list
-- Summary – Date-wise and UPC-wise summary
-- No. Of Days ZeroTraffic – Cell-wise zero-traffic duration
+- Excel file with consolidated data, summary, and zero-traffic day count
+- MySQL tables containing processed KPI results
 
 ---
 
-## Zero-Traffic Logic
-A cell is classified as zero-traffic if:
-- Latest available date
-- No_of_Hours equals 4
-- NR_Traffic equals 0
-- administrativeState is UNLOCKED
-- operationalState is ENABLED
+## Configuration
+All file paths and parameters are managed through `config.json`.
 
 ---
 
-## Logging
-All execution steps and errors are logged in:
-zero_traffic_automation.log
+## How to Run
+1. Update `config.json` with required paths
+2. Ensure MySQL is running locally
+3. Install required Python packages
+4. Run the script:
+```bash
+python zero_traffic_automation.py
 
 
-
-This helps in debugging, auditing, and operational monitoring.
-
----
-
-## Impact
-- Manual effort reduced from hours to minutes
-- Improved reporting accuracy and consistency
-- Reusable automation for daily network operations
-
----
-
-## Note
-All input and output files used in this repository are sample or dummy data.
-No production or customer data is included.
-
----
-
-## Author
-Vishwanath Malli  
-Python Automation | Telecom Network Operations
+Use Case
+Telecom network operations
+Zero-traffic validation during site cutovers
+Daily health check automation
+Performance monitoring and KPI reporting
 
 
-
+Author
+Vishwanath Malli
