@@ -1,8 +1,9 @@
-{
-  "base_path": "C:/Python-Workspace/Projects/Project02_5G_ZeroTraffic",
 
-  "raw_mail_file": "5G_Zero_Traffic_Cell_Backup.csv",
-  "online_sheet_file": "5G_Zerotraffic_Trending_18072025.xlsx",
+{
+  "base_path": "C://Users//esvxxxi//OneDrive - Ericsson//Desktop//My_own//Git hub Repo//5G_Repo_with_SQL",
+
+  "raw_mail_file": "raw file from MDP",
+  "online_sheet_file": "5G_Zerotraffic_Trending_18092025.xlsx",
   "online_sheet_name": "Consol_Non-Consol",
   "availability_file": "5G_Downtime_Man_Auto.csv",
   "engineer_mapping_file": "NEWOWNERNAMES_16July2024.xlsx",
@@ -11,4 +12,6 @@
   "output_file": "output.xlsx",
   "log_file": "zero_traffic_automation.log"
 }
+
+
 
