@@ -11,8 +11,8 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 from urllib.parse import quote_plus
 
-db_user = "root"
-db_password = quote_plus("Vishwa@0546")   # URL-encoded
+db_user = "user name"
+db_password = quote_plus("your password")   # URL-encoded
 db_host = "localhost"
 db_port = 3306
 db_name = "4G5G_Zerotraffic_Automation"
@@ -262,4 +262,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
