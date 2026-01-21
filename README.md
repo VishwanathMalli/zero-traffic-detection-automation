@@ -29,7 +29,6 @@ It processes daily KPI data, applies business rules to identify zero-traffic cel
 Configured through `config.json`:
 - Raw NR KPI CSV file
 - Online cells Excel file
-- Radio availability CSV file
 - Engineer / province mapping Excel file
 
 - please access the input files from drive link attached
