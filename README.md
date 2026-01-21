@@ -32,6 +32,9 @@ Configured through `config.json`:
 - Radio availability CSV file
 - Engineer / province mapping Excel file
 
+- please access the input files from drive link attached
+  https://drive.google.com/drive/folders/1Y4I8nlI1w8makIy5cD4ootJW68-cD3cZ?usp=sharing
+
 ---
 
 ## Processing Logic
